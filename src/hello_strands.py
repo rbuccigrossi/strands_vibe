@@ -3,7 +3,7 @@ import os
 import sys
 
 from strands import Agent
-from strands.models import OpenAI
+from strands.models.openai import OpenAIModel
 
 def main():
     """
@@ -24,7 +24,7 @@ def main():
     try:
         # 1. Configure the model provider
         # The OpenAI model will automatically use the OPENAI_API_KEY environment variable.
-        model = OpenAI()
+        model = OpenAIModel(model_id="gpt-3.5-turbo")
 
         # 2. Create the agent and provide it with the model
         agent = Agent(model=model)
