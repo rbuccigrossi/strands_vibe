@@ -1,5 +1,6 @@
 import argparse
-from strands import Agent, Swarm
+from strands import Agent
+from strands.multiagent import Swarm
 from strands.models.openai import OpenAIModel
 from src.tools import search_duckduckgo_html, get_url_content_html
 
