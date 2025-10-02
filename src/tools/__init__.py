@@ -1,0 +1,1 @@
+from .search import search_duckduckgo_html, get_url_content_html
