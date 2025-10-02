@@ -41,21 +41,18 @@ def main():
 
     # 4. Create the Agents
     researcher = Agent(
-        id="researcher",
-        role=RESEARCHER_PROMPT,
+        system_prompt=RESEARCHER_PROMPT,
         model=model,
         tools=[search_duckduckgo_html, get_url_content_html]
     )
 
     writer = Agent(
-        id="writer",
-        role=WRITER_PROMPT,
+        system_prompt=WRITER_PROMPT,
         model=model
     )
 
     editor = Agent(
-        id="editor",
-        role=EDITOR_PROMPT,
+        system_prompt=EDITOR_PROMPT,
         model=model
     )
 
