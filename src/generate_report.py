@@ -1,5 +1,6 @@
 import argparse
-from strands_agents import Agent, Swarm
+from strands import Agent, Swarm
+from strands.models.openai import OpenAIModel
 from src.tools import search_duckduckgo_html, get_url_content_html
 
 # 1. Define System Prompts for Each Agent
@@ -34,33 +35,36 @@ def main():
     parser.add_argument("--prompt", type=str, required=True, help="The prompt for the report.")
     args = parser.parse_args()
 
-    # 3. Create the Agents
+    # 3. Configure the model provider
+    model = OpenAIModel(model_id="gpt-4o-mini")
+
+    # 4. Create the Agents
     researcher = Agent(
         id="researcher",
         role=RESEARCHER_PROMPT,
-        model="gpt-4o-mini",
+        model=model,
         tools=[search_duckduckgo_html, get_url_content_html]
     )
 
     writer = Agent(
         id="writer",
         role=WRITER_PROMPT,
-        model="gpt-4o-mini"
+        model=model
     )
 
     editor = Agent(
         id="editor",
         role=EDITOR_PROMPT,
-        model="gpt-4o-mini"
+        model=model
     )
 
-    # 4. Instantiate the Swarm
+    # 5. Instantiate the Swarm
     swarm = Swarm(
         agents=[researcher, writer, editor],
         # Using default handoff logic
     )
 
-    # 5. Run the Swarm and Print the Result
+    # 6. Run the Swarm and Print the Result
     print("Running swarm to generate report...")
     final_report = swarm.run(args.prompt)
     print("\n--- Final Report ---")
